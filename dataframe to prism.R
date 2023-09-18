@@ -31,7 +31,7 @@ graph_prism <- function(df, h, x, y, l, xsort_desc = F, lsort_desc = F, logy = F
   
   # reading in a template file (blank PRISM file that is graphically pre-formatted)
   # the data tables in PRISM are encoded using XML
-  prism_xml <- read_xml("C:/Users/hubera/Box/Enamines/PRISM files/template.pzfx") %>%
+  prism_xml <- read_xml("template.pzfx") %>%
     # deleting namespace from xml file (required to edit file, but will be replaced after editing tables)
     xml_ns_strip() %>%
     # formats XML file as a list of nodes that can be edited
@@ -173,7 +173,6 @@ graph_prism <- function(df, h, x, y, l, xsort_desc = F, lsort_desc = F, logy = F
       # Note: files will be easily overwritten if not saved elsewhere
       saveXML(prism_xml,
               paste0(
-                "C:/Users/hubera/Box/Enamines/",
                 paste(h, collapse = " "),
                 ceiling(graph_no / 20),
                 ".pzfx"
@@ -181,7 +180,6 @@ graph_prism <- function(df, h, x, y, l, xsort_desc = F, lsort_desc = F, logy = F
       
       # open file
       shell.exec(paste0(
-        "C:/Users/hubera/Box/Enamines/",
         paste(h, collapse = " "),
         ceiling(graph_no / 20),
         ".pzfx"
@@ -189,7 +187,7 @@ graph_prism <- function(df, h, x, y, l, xsort_desc = F, lsort_desc = F, logy = F
       
       # reset prism_xml file to template and strip namespaces if more graphs need to be made
       if (graph_no != length(graph_list)) {
-        prism_xml <- read_xml("C:/Users/hubera/Box/Enamines/PRISM files/template.pzfx") %>%
+        prism_xml <- read_xml("template.pzfx") %>%
           xml_ns_strip() %>%
           xmlParse()
       }
